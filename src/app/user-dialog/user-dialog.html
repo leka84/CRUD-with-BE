@@ -1,0 +1,44 @@
+<h2 mat-dialog-title> {{ isEdit ? 'Edit' : 'Add'}} User</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="userForm" class="form">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" required />
+
+            @if (userForm.get('firstName')?.hasError('required')) {
+                <mat-error>First name is required</mat-error>
+            }
+
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" required />
+            @if (userForm.get('lastName')?.hasError('required')) {
+                <mat-error>Last name required</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required />
+            @if (userForm.get('email')?.hasError('required')){
+                <mat-error>Email required</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone" />
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button 
+        mat-raised-button
+        color="primary"
+        [disabled]="userForm.invalid"
+        (click)="onSave()"
+        >
+        {{ isEdit ? 'Update' : 'Add' }}
+    </button>
+</mat-dialog-actions>
